@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ollama MCP Browser Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ollama MCP Browser Test</h1>
+    <div class="container">
+        <h2>Test Results</h2>
+        <p>If you're seeing this page, the MCP browser integration is working correctly!</p>
+        <p class="success">✓ Browser successfully opened via MCP</p>
+        
+        <h2>What's Happening</h2>
+        <p>This test demonstrates how Ollama can use the Model Context Protocol (MCP) to interact with your browser.</p>
+        <p>The process works as follows:</p>
+        <ol>
+            <li>The test script sends a prompt to Ollama</li>
+            <li>Ollama processes the MCP command in the prompt</li>
+            <li>The MCP module forwards the command to the browser MCP server</li>
+            <li>The browser MCP server opens this page in your default browser</li>
+        </ol>
+    </div>
+</body>
+</html>

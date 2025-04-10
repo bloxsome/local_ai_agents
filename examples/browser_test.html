@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Integration Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .ollama-logo {
+            display: block;
+            margin: 0 auto;
+            max-width: 200px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Browser Integration Test</h1>
+    <div class="container">
+        <h2>Test Results</h2>
+        <p>If you're seeing this page, the browser integration is working correctly!</p>
+        <p class="success">✓ Browser successfully opened</p>
+        
+        <h2>What's Happening</h2>
+        <p>This test demonstrates how Claude can use the browser_action tool to interact with web pages.</p>
+        <p>The process works as follows:</p>
+        <ol>
+            <li>Claude uses the browser_action tool to launch a browser</li>
+            <li>The browser loads this HTML file</li>
+            <li>Claude can interact with the page (click buttons, type text, etc.)</li>
+            <li>Claude can see screenshots of the page to verify its state</li>
+        </ol>
+        
+        <h2>Interactive Elements</h2>
+        <p>Try clicking the button below to see a message:</p>
+        <button id="testButton" class="button">Click Me!</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        document.getElementById('testButton').addEventListener('click', function() {
+            document.getElementById('message').textContent = 'Button clicked successfully!';
+        });
+    </script>
+</body>
+</html>
