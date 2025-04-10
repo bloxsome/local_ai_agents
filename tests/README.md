@@ -6,7 +6,7 @@ This directory contains tests for the integration between Local AI Agents and Ol
 
 - Go 1.18 or higher
 - [Ollama](https://ollama.com/) installed and available in your PATH
-- An LLM model available in Ollama (default: `llama3.1:latest`)
+- An LLM model available in Ollama (default: `llama3.3:latest`)
 
 ## Running the Tests
 
@@ -66,7 +66,7 @@ If the tests fail, check the following:
 
 1. Is Ollama installed and in your PATH?
 2. Is Ollama running? You can start it with `ollama serve`
-3. Is the test model available? You can check with `ollama list` and pull it with `ollama pull llama3.1:latest`
+3. Is the test model available? You can check with `ollama list` and pull it with `ollama pull llama3.3:latest`
 4. Are there any network issues preventing connection to Ollama?
 
 ## Adding More Tests

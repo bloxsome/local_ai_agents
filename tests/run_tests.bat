@@ -37,7 +37,7 @@ if %ERRORLEVEL% NEQ 0 (
 
 REM Check if the test model is available
 echo Checking if test model is available...
-set MODEL=llama3.1:latest
+set MODEL=llama3.3:latest
 curl -s "http://localhost:11434/api/tags" | findstr "%MODEL%" >nul
 if %ERRORLEVEL% NEQ 0 (
     echo Warning: Test model %MODEL% is not available

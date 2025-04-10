@@ -25,7 +25,7 @@ func TestOllamaConnection(t *testing.T) {
 
 	// Test if Ollama is running by sending a simple prompt
 	prompt := "Hello, this is a test from Local AI Agents. Please respond with a short greeting."
-	model := "llama3.1:latest" // Use a model that should be available
+	model := "llama3.3:latest" // Use a model that should be available
 	username := "TestUser"
 
 	logger.Info("Sending test prompt to Ollama")

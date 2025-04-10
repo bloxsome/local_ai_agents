@@ -1,51 +1,52 @@
-# 🤖 Local_AI_Agents: Your Advanced AI Assistant Builder with Graph Knowledgebase 🚀
+# 🤖 Local_AI_Agents: Your Advanced AI Assistant Builder with MCP Integration 🚀
 
-Welcome to Local_AI_Agents! This repository allows you to create sophisticated AI agents using local models, featuring a unique graph-based knowledgebase with a high-performance Go implementation. It's like having a high-tech AI laboratory with a built-in brain! 🧠✨
+Welcome to Local_AI_Agents! This repository allows you to create sophisticated AI agents using local models, featuring powerful Model Context Protocol (MCP) integration for connecting to external tools and resources. It's like having a high-tech AI laboratory with seamless connectivity to the tools you need! 🧠✨
 
 ## 🌟 What's New?
 
-- 🕸️ Graph-based Knowledgebase: A novel approach using JSON for flexible, relational knowledge storage
+- 🔌 Model Context Protocol (MCP): Seamlessly connect your AI to external tools and resources
+- 🧩 MCP Server Integration: Create and manage custom MCP servers for extended functionality
+- 🔄 Dynamic Tool Discovery: Automatically detect and use tools provided by MCP servers
+- 🌐 Browser Integration: Control web browsers through MCP for web-based tasks
 - 🧠 Enhanced Debug Agent with detailed cognitive processing visualization
-- 🌳 Dynamic Knowledge Tree generation and management
-- 🔍 Improved memory search and context management
-- 🧐 Fact-checking and source credibility assessment
 - 🎭 Multi-agent system with easy switching between agents
 - 🔀 Interactive follow-up question handling
 - 🎨 Rich, colorful command-line interface with progress tracking
 - 🛠️ Modular design with improved error handling and logging
 - 🚀 High performance and better concurrency with Go
-- 🔌 Model Context Protocol (MCP) for external system integration
+- 🔍 Improved memory search and context management
 
 ## 🚀 Key Features
 
-1. 📊 Graph Knowledgebase: Utilizes a JSON-based graph structure for flexible and relational knowledge representation
-2. 📚 Modular Architecture: Each function is in a separate module for easy customization and extension
-3. 💬 Interactive CLI: Clean, efficient command-line interface
-4. 🔐 Secure Configuration: Customize your AI's personality and behavior through configuration
-5. 🧪 Comprehensive Testing: Because quality is our superpower!
-6. 🌐 Web Search Integration: Your AI can search the web using DuckDuckGo
-7. 📜 Advanced Chat History: Never forget a conversation with built-in history management and analysis
-8. 🧠 Sophisticated Memory Search: Quickly retrieve and utilize relevant information from past interactions and uploaded documents
-9. 🧵 Fabric Integration: Use Fabric patterns for enhanced AI interactions
+1. 🔌 Model Context Protocol (MCP): Connect your AI to external tools and resources
+2. 🧩 Extensible MCP Architecture: Create custom MCP servers for specialized functionality
+3. 🌐 Browser Control: Automate web tasks through MCP browser integration
+4. 🔍 API Integration: Connect to external APIs through custom MCP servers
+5. 📚 Modular Architecture: Each function is in a separate module for easy customization
+6. 💬 Interactive CLI: Clean, efficient command-line interface
+7. 🔐 Secure Configuration: Customize your AI's personality and behavior through configuration
+8. 🧪 Comprehensive Testing: Includes Ollama integration tests for quality assurance
+9. 📜 Advanced Chat History: Built-in history management and analysis
 10. 🎭 Multi-Agent System: Interact with multiple AI personalities in one session
 11. 🤖 Debug Mode: Visualize the agent's thought process and decision-making in real-time
-12. 🌳 Knowledge Tree: Dynamic generation and visualization of knowledge structures
-13. 🧐 Fact-Checking: Verify information and assess source credibility
-14. 👤 User Profiling: Adapt responses based on user expertise and interests
-15. 🔌 MCP Support: Connect to external tools and resources through the Model Context Protocol
+12. 🧐 Fact-Checking: Verify information and assess source credibility
+13. 👤 User Profiling: Adapt responses based on user expertise and interests
+14. 🚀 High Performance: Optimized Go implementation for speed and efficiency
+15. 🛠️ Ollama Integration: Seamless connection to local Ollama models
 
-## 💡 Why JSON-based Graph Knowledgebase?
+## 💡 Why Model Context Protocol (MCP)?
 
-Our unique approach of using a JSON-based graph structure for the knowledgebase offers several advantages:
+Our implementation of the Model Context Protocol (MCP) offers powerful advantages for AI agents:
 
-1. 🔄 Flexibility: Easily adapt and evolve the knowledge structure as your AI learns
-2. 🔗 Rich Relationships: Capture complex relationships between concepts more intuitively than in traditional vector databases
-3. 🚀 Performance: Efficient querying and updating of interconnected information
-4. 🧩 Simplicity: No need for complex vector database setups or maintenance
-5. 📦 Portability: JSON format allows for easy data transfer and backup
-6. 🔍 Interpretability: Graph structure provides clear visibility into the AI's knowledge connections
+1. 🔌 Extensibility: Easily extend your AI's capabilities by connecting to external tools and services
+2. 🧩 Modularity: Create specialized MCP servers for different tasks and domains
+3. 🌐 Web Integration: Control browsers to perform complex web-based tasks
+4. 🔄 Dynamic Discovery: Automatically detect and use tools provided by MCP servers
+5. 🔒 Security: Fine-grained control over which tools require explicit approval
+6. 📦 Portability: MCP servers can be shared and reused across different projects
+7. 🛠️ Custom Tools: Create custom tools tailored to your specific needs
 
-This approach allows Local_AI_Agents to have a more nuanced and context-aware understanding, leading to more intelligent and adaptive responses.
+This approach allows Local AI Agents to interact with the world beyond just text, enabling more powerful and practical applications.
 
 ## 🛠️ Getting Started
 
@@ -67,9 +68,9 @@ This approach allows Local_AI_Agents to have a more nuanced and context-aware un
 
 1. Visit the [Ollama website](https://ollama.com/) and follow the installation instructions for your operating system.
 
-2. Once installed, run Ollama and download a model (e.g., llama3.1:latest):
+2. Once installed, run Ollama and download a model (e.g., llama3.3:latest):
    ```bash
-   ollama run llama3.1:latest
+   ollama run llama3.3:latest
    ```
 
 ### Configuration
@@ -145,4 +146,4 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) for detai
 
 ---
 
-Built with ❤️ and 🧠 by the Local_AI_Agents team. Let's revolutionize AI knowledge representation! 🚀
+Built with ❤️ and 🧠 by the Local_AI_Agents team. Let's revolutionize AI connectivity and capabilities! 🚀

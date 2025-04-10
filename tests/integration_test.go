@@ -55,7 +55,7 @@ func SetupSuite(t *testing.T) *TestSuite {
 		config:     cfg,
 		logger:     logger,
 		ollamaURL:  ollamaURL,
-		testModel:  "llama3.1:latest", // Use a model that should be available
+		testModel:  "llama3.3:latest", // Use a model that should be available
 		isOllamaUp: isOllamaUp,
 	}
 }

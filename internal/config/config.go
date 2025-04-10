@@ -100,7 +100,7 @@ func LoadConfig() (*Configuration, error) {
 		AgentName: getEnv("AI_AGENT_NAME", "Otto"),
 
 		// Model configuration
-		DefaultModel:   "llama3.1:latest",
+		DefaultModel:   "llama3.3:latest",
 		EmbeddingModel: getEnv("AI_EMBEDDING_MODEL", "nomic-embed-text"),
 
 		// Memory configuration
