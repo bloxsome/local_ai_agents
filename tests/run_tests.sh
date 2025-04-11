@@ -41,7 +41,7 @@ fi
 
 # Check if the test model is available
 echo "Checking if test model is available..."
-MODEL="llama3.1:latest"
+MODEL="llama3.3:latest"
 if ! curl -s "http://localhost:11434/api/tags" | grep -q "$MODEL"; then
     echo -e "${YELLOW}Warning: Test model $MODEL is not available${NC}"
     echo "Pulling model $MODEL..."
