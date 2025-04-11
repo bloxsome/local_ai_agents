@@ -32,5 +32,4 @@ command.wav
 wake_detect.wav
 
 # Remove Compiled Artifacts and Logs
-local_ai_agents
-local_ai_agents.log
+local_ai_agents*
