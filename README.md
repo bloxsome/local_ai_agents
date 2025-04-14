@@ -1,13 +1,14 @@
-# Local_AI_Agents
+# Local AI Agents
 
 A Go-based framework for creating AI agents using local models with Model Context Protocol (MCP) integration for connecting to external tools and resources.
 
 ## Overview
 
-Local_AI_Agents provides a foundation for building AI assistants that can:
+Local AI Agents provides a foundation for building AI assistants that can:
 - Connect to local language models (via Ollama)
 - Integrate with external tools through the Model Context Protocol (MCP)
-- Control web browsers for automated tasks
+- Allow the AI model to build tools dynamically 
+- Control web browsers for automated tasks*
 - Maintain conversation history and context
 - Support multiple agent personalities
 
@@ -21,7 +22,7 @@ Local_AI_Agents provides a foundation for building AI assistants that can:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/Local_AI_Agents.git
+   git clone https://github.com/bloxsome/local_ai_agents.git
    cd Local_AI_Agents
    ```
 
@@ -66,7 +67,7 @@ Run the integration tests:
 ```bash
 cd tests
 ./run_tests.sh  # On Unix-like systems
-run_tests.bat   # On Windows
+run_tests.bat   # On Windows - Not Tested
 ```
 
 See [tests/README.md](tests/README.md) for more details on testing.
@@ -75,7 +76,7 @@ See [tests/README.md](tests/README.md) for more details on testing.
 
 ### AI-Assisted MCP Server Development
 
-Yes, AI models (like Claude) can write MCP servers for you. The MCP protocol follows a well-defined structure that makes it suitable for AI-assisted development:
+Yes, AI models (like Claude) can write MCP servers for you let try and bring this local with ollama. The MCP protocol follows a well-defined structure that makes it suitable for AI-assisted development:
 
 1. Start with an existing example (calculator.go or weather.go) as a template
 2. Define the tools and resources your server will provide
