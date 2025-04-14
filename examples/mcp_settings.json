@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "browser": {
+      "name": "browser",
+      "command": "./ollama_agents/examples/mcp_browser_server/browser",
+      "args": [],
+      "env": {},
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}

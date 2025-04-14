@@ -1,0 +1,35 @@
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"github.com/bloxsome/local_ai_agents/internal/config"
+	"github.com/bloxsome/local_ai_agents/internal/modules/input"
+	"github.com/bloxsome/local_ai_agents/internal/modules/logging"
+)
+
+func main() {
+	// Set up logging
+	logFile := "test_input.log"
+	if err := logging.SetupLogging(logFile, "DEBUG"); err != nil {
+		fmt.Printf("Error setting up logging: %v\n", err)
+		os.Exit(1)
+	}
+	logger := logging.GetLogger()
+	logger.Info("Test input program started")
+
+	// Load configuration
+	_, err := config.LoadConfig()
+	if err != nil {
+		logger.Error("Error loading configuration: %v", err)
+		fmt.Printf("Error loading configuration: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Run the advanced input test
+	fmt.Println("Starting advanced input test...")
+	input.RunAdvancedInputTest()
+
+	logger.Info("Test input program completed")
+}

@@ -1,0 +1,35 @@
+# Go specific
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Dependency directories (remove the comment below if you're using vendoring)
+# /vendor/
+
+# Go workspace file
+go.work
+
+# Binary file with the same name as the directory
+local_ai_agents
+
+# Project specific
+data/
+output.json
+.zed/
+.envrc
+logs/
+audio.wav
+command.wav
+wake_detect.wav
+
+# Remove Compiled Artifacts and Logs
+local_ai_agents*
