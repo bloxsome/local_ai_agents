@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/bloxsome/local_ai_agents/internal/modules/agents"
 	"github.com/bloxsome/local_ai_agents/internal/modules/context"
 	"github.com/bloxsome/local_ai_agents/internal/modules/logging"
 	"github.com/bloxsome/local_ai_agents/internal/modules/mcp"
@@ -42,6 +43,13 @@ var slashCommands = map[string]CommandHandler{
 	"/explain":        explainCommand,
 	"/fact_check":     factCheckCommand,
 	"/profile":        profileCommand,
+
+	// Agent commands
+	"/agent":        agentHelpCommand,
+	"/agent-list":   agentListCommand,
+	"/agent-switch": agentSwitchCommand,
+	"/agent-info":   agentInfoCommand,
+
 }
 
 // GetSlashCommands returns the map of available slash commands
@@ -216,6 +224,99 @@ func profileCommand(command string) string {
 	return "CONTINUE"
 }
 
+// Agent command handlers
+// agentHelpCommand displays agent help information
+func agentHelpCommand(command string) string {
+	helpText := `
+Agent Commands:
+/agent-list           - List all available agent personalities
+/agent-switch <name>  - Switch to a different agent personality
+/agent-info           - Display information about the current agent personality
+`
+	fmt.Println(helpText)
+	return "CONTINUE"
+}
+
+// agentListCommand lists all available agent personalities
+func agentListCommand(command string) string {
+	if agents.DefaultManager == nil {
+		fmt.Println("Agents module not initialized")
+		return "CONTINUE"
+	}
+
+	personalities := agents.GetPersonalities()
+	if len(personalities) == 0 {
+		fmt.Println("No agent personalities available")
+		return "CONTINUE"
+	}
+
+	activeAgent, err := agents.GetActiveAgent()
+	activeAgentName := ""
+	if err == nil {
+		activeAgentName = activeAgent.Name
+	}
+
+	fmt.Println("Available Agent Personalities:")
+	for name, personality := range personalities {
+		activeMarker := " "
+		if name == activeAgentName {
+			activeMarker = "*"
+		}
+		fmt.Printf("%s %s: %s\n", activeMarker, name, personality.Description)
+	}
+	fmt.Println("\n* indicates the currently active agent")
+
+	return "CONTINUE"
+}
+
+// agentSwitchCommand switches to a different agent personality
+func agentSwitchCommand(command string) string {
+	if agents.DefaultManager == nil {
+		fmt.Println("Agents module not initialized")
+		return "CONTINUE"
+	}
+
+	parts := strings.Fields(command)
+	if len(parts) < 2 {
+		fmt.Println("Usage: /agent-switch <name>")
+		return "CONTINUE"
+	}
+
+	agentName := parts[1]
+	if err := agents.SetActiveAgent(agentName); err != nil {
+		fmt.Printf("Error switching agent: %v\n", err)
+	} else {
+		fmt.Printf("Switched to agent '%s'\n", agentName)
+	}
+
+	return "CONTINUE"
+}
+
+// agentInfoCommand displays information about the current agent personality
+func agentInfoCommand(command string) string {
+	if agents.DefaultManager == nil {
+		fmt.Println("Agents module not initialized")
+		return "CONTINUE"
+	}
+
+	activeAgent, err := agents.GetActiveAgent()
+	if err != nil {
+		fmt.Printf("Error getting active agent: %v\n", err)
+		return "CONTINUE"
+	}
+
+	fmt.Printf("Active Agent: %s\n", activeAgent.Name)
+	fmt.Printf("Description: %s\n", activeAgent.Description)
+	fmt.Printf("Preferred Model: %s\n", activeAgent.PreferredModel)
+
+	fmt.Println("\nTraits:")
+	for trait, value := range activeAgent.Traits {
+		fmt.Printf("• %s: %s\n", trait, value)
+	}
+
+	return "CONTINUE"
+}
+
 // helpCommand displays help information
 func helpCommand(command string) string {
 	helpText := `
@@ -232,6 +333,12 @@ Context Commands:
 /explain <concept> - Get an explanation of a concept
 /fact_check <statement> - Perform a fact check on a statement
 /profile       - Display your user profile
+
+Agent Commands:
+/agent         - Show agent help
+/agent-list    - List all available agent personalities
+/agent-switch <name> - Switch to a different agent personality
+/agent-info    - Display information about the current agent personality
 
 MCP Commands:
 /mcp           - Show MCP help

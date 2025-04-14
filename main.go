@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/bloxsome/local_ai_agents/internal/config"
+	"github.com/bloxsome/local_ai_agents/internal/modules/agents"
 	"github.com/bloxsome/local_ai_agents/internal/modules/context"
 	"github.com/bloxsome/local_ai_agents/internal/modules/input"
 	"github.com/bloxsome/local_ai_agents/internal/modules/logging"
@@ -55,6 +56,16 @@ func main() {
 		defer context.Shutdown()
 	}
 
+	// Initialize agents module
+	logger.Info("Initializing agents module...")
+	if err := agents.Initialize(cfg); err != nil {
+		logger.Error("Error initializing agents module: %v", err)
+		fmt.Printf("Error initializing agents module: %v\n", err)
+	} else {
+		logger.Info("Agents module initialized successfully")
+		defer agents.Shutdown()
+	}
+
 	// Initialize and run the agent
 	logger.Info("Starting agent interaction loop...")
 	fmt.Println("Type your messages to interact with the agent.")
@@ -91,14 +102,54 @@ func main() {
 
 		// Generate response
 		response, err := ollama.Generate(prompt, cfg.DefaultModel, cfg.UserName)
+
+		// Get the active agent
+		activeAgent, err := agents.GetActiveAgent()
+		if err != nil {
+			logger.Error("Error getting active agent: %v", err)
+			fmt.Printf("Error: %v\n", err)
+			continue
+		}
+
+		// Format prompt with context and agent personality
+		contextStr := context.FormatContextForPrompt()
+		prompt, err := agents.FormatPrompt(contextStr, result.Text)
+		if err != nil {
+			logger.Error("Error formatting prompt: %v", err)
+			fmt.Printf("Error: %v\n", err)
+			continue
+		}
+
+		// Get the preferred model for the active agent
+		model, err := agents.GetPreferredModel()
+		if err != nil {
+			logger.Error("Error getting preferred model: %v", err)
+			model = cfg.DefaultModel
+		}
+
+		// Generate response
+		response, err := ollama.Generate(prompt, model, cfg.UserName)
 		if err != nil {
 			logger.Error("Error processing prompt: %v", err)
 			fmt.Printf("Error: %v\n", err)
 			continue
 		}
 
+
 		// Add assistant message to context
 		context.AddMessage("assistant", response)
+		// Format the response using the agent's template
+		formattedResponse, err := agents.FormatResponse(response)
+		if err != nil {
+			logger.Error("Error formatting response: %v", err)
+			formattedResponse = response
+		}
+
+		// Print the response
+		fmt.Printf("%s: %s\n", activeAgent.Name, formattedResponse)
+
+		// Add assistant message to context
+		context.AddMessage("assistant", formattedResponse)
 
 		// Save history periodically
 		if err := context.SaveHistory(); err != nil {
