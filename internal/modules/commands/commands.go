@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/bloxsome/local_ai_agents/internal/modules/context"
 	"github.com/bloxsome/local_ai_agents/internal/modules/logging"
 	"github.com/bloxsome/local_ai_agents/internal/modules/mcp"
 )
@@ -32,6 +33,15 @@ var slashCommands = map[string]CommandHandler{
 	"/mcp-remove":    mcpRemoveCommand,
 	"/mcp-tools":     mcpToolsCommand,
 	"/mcp-resources": mcpResourcesCommand,
+
+	// Context commands
+	"/context":        contextCommand,
+	"/clear_context":  clearContextCommand,
+	"/bullets":        bulletsCommand,
+	"/knowledge_tree": knowledgeTreeCommand,
+	"/explain":        explainCommand,
+	"/fact_check":     factCheckCommand,
+	"/profile":        profileCommand,
 }
 
 // GetSlashCommands returns the map of available slash commands
@@ -62,6 +72,150 @@ func HandleSlashCommand(command string) string {
 	return "CONTINUE"
 }
 
+// Context command handlers
+
+// contextCommand displays the current context
+func contextCommand(command string) string {
+	if context.DefaultManager == nil {
+		fmt.Println("Context module not initialized")
+		return "CONTINUE"
+	}
+
+	ctx := context.GetContext()
+	if len(ctx) == 0 {
+		fmt.Println("No context available")
+		return "CONTINUE"
+	}
+
+	fmt.Println("Current Context:")
+	for i, item := range ctx {
+		fmt.Printf("%d. %s\n", i+1, item)
+	}
+
+	return "CONTINUE"
+}
+
+// clearContextCommand clears the current context
+func clearContextCommand(command string) string {
+	if context.DefaultManager == nil {
+		fmt.Println("Context module not initialized")
+		return "CONTINUE"
+	}
+
+	context.ClearContext()
+	fmt.Println("Context cleared")
+
+	return "CONTINUE"
+}
+
+// bulletsCommand displays the current bullet points
+func bulletsCommand(command string) string {
+	if context.DefaultManager == nil {
+		fmt.Println("Context module not initialized")
+		return "CONTINUE"
+	}
+
+	bullets := context.GetBullets()
+	if len(bullets) == 0 {
+		fmt.Println("No bullet points available")
+		return "CONTINUE"
+	}
+
+	fmt.Println("Current Bullet Points:")
+	for _, bullet := range bullets {
+		fmt.Printf("• %s\n", bullet)
+	}
+
+	return "CONTINUE"
+}
+
+// knowledgeTreeCommand displays the knowledge tree
+func knowledgeTreeCommand(command string) string {
+	if context.DefaultManager == nil {
+		fmt.Println("Context module not initialized")
+		return "CONTINUE"
+	}
+
+	tree := context.GetKnowledgeTree()
+	if len(tree) == 0 {
+		fmt.Println("Knowledge tree is empty")
+		return "CONTINUE"
+	}
+
+	fmt.Println("Knowledge Tree:")
+	for concept, knowledge := range tree {
+		fmt.Printf("• %s:\n", concept)
+		for _, item := range knowledge {
+			fmt.Printf("  - %s\n", item)
+		}
+	}
+
+	return "CONTINUE"
+}
+
+// explainCommand provides an explanation of a concept
+func explainCommand(command string) string {
+	if context.DefaultManager == nil {
+		fmt.Println("Context module not initialized")
+		return "CONTINUE"
+	}
+
+	parts := strings.Fields(command)
+	if len(parts) < 2 {
+		fmt.Println("Usage: /explain <concept>")
+		return "CONTINUE"
+	}
+
+	// Get the concept (everything after the command)
+	concept := strings.Join(parts[1:], " ")
+	explanation := context.ExplainConcept(concept)
+	fmt.Println(explanation)
+
+	return "CONTINUE"
+}
+
+// factCheckCommand performs a fact check on a statement
+func factCheckCommand(command string) string {
+	if context.DefaultManager == nil {
+		fmt.Println("Context module not initialized")
+		return "CONTINUE"
+	}
+
+	parts := strings.Fields(command)
+	if len(parts) < 2 {
+		fmt.Println("Usage: /fact_check <statement>")
+		return "CONTINUE"
+	}
+
+	// Get the statement (everything after the command)
+	statement := strings.Join(parts[1:], " ")
+	result := context.FactCheck(statement)
+	fmt.Println(result)
+
+	return "CONTINUE"
+}
+
+// profileCommand displays the user profile
+func profileCommand(command string) string {
+	if context.DefaultManager == nil {
+		fmt.Println("Context module not initialized")
+		return "CONTINUE"
+	}
+
+	profile := context.GetUserProfile()
+	if len(profile) == 0 {
+		fmt.Println("User profile is empty")
+		return "CONTINUE"
+	}
+
+	fmt.Println("User Profile:")
+	for key, value := range profile {
+		fmt.Printf("• %s: %s\n", key, value)
+	}
+
+	return "CONTINUE"
+}
+
 // helpCommand displays help information
 func helpCommand(command string) string {
 	helpText := `
@@ -69,6 +223,15 @@ Available commands:
 /h or /help - Show this help message
 /e or /exit - Exit the program
 /q or /quit - Exit the program
+
+Context Commands:
+/context       - Show current context
+/clear_context - Clear the current context
+/bullets       - Display current bullet points
+/knowledge_tree - Display the knowledge tree
+/explain <concept> - Get an explanation of a concept
+/fact_check <statement> - Perform a fact check on a statement
+/profile       - Display your user profile
 
 MCP Commands:
 /mcp           - Show MCP help
