@@ -49,6 +49,7 @@ func main() {
 	if err := context.Initialize(cfg); err != nil {
 		logger.Error("Error initializing context module: %v", err)
 		fmt.Printf("Error initializing context module: %v\n", err)
+		os.Exit(1)
 	} else {
 		logger.Info("Context module initialized successfully")
 		defer context.Shutdown()
